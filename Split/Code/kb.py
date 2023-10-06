@@ -1,5 +1,5 @@
 
-from kmk.quickpin.RP2040.YD_RP2040 import pinout as pins
+from kmk.quickpin.RP2040.waveshareRP2040zero import pinout as pins
 #from kmk.quickpin.pro_micro.sparkfun_promicro_rp2040 import pinout as pins
 from kmk.kmk_keyboard import KMKKeyboard as _KMKKeyboard
 from kmk.scanners import DiodeOrientation
@@ -25,12 +25,12 @@ led_positions = [
 
 # fmt: off
 # --8<-- [start:rgbdata]
-# EDIT your [R, G, B] values below if you set the variable klor_rgb = 'peg_rgb':
+# EDIT your [R, G, B] values below
 rgb_data = [
     [0, 0, 255], [0, 191, 255], [0, 255, 128], [63, 255, 0], [254, 255, 0], [251, 64, 0],                                                              [251, 64, 0], [254, 255, 0], [63, 255, 0], [0, 255, 128], [0, 191, 255], [0, 0, 255],
     [0, 0, 255], [0, 191, 255], [0, 255, 128], [63, 255, 0], [254, 255, 0], [251, 64, 0],                                                              [251, 64, 0], [254, 255, 0], [63, 255, 0], [0, 255, 128], [0, 191, 255], [0, 0, 255],
     [0, 0, 255], [0, 191, 255], [0, 255, 128], [63, 255, 0], [254, 255, 0], [251, 64, 0],                                                              [251, 64, 0], [254, 255, 0], [63, 255, 0], [0, 255, 128], [0, 191, 255], [0, 0, 255],
-                                                             [254, 255, 0], [251, 64, 0], [247, 0, 122], [188, 255, 249],   [188, 0, 249], [247, 0, 122],[251, 64, 0], [254, 255, 0],
+                                                             [254, 255, 0], [251, 64, 0], [247, 0, 0], [255,0,0],        [188, 0, 249], [247, 0, 122],[251, 64, 0], [254, 255, 0],
 ]
 # --8<-- [end:rgbdata]
 # fmt: on
@@ -38,22 +38,10 @@ rgb_data = [
 # Creates a tuple containing both LED position and RGB data
 pos_rgb = [(x, y) for x, y in zip(led_positions, rgb_data)]
 
-# Cuts necessary for KLOR variants with less keys
-cuts = {
-    "polydactyl": [],
-    "konrad": [0, 22],
-    "yubitsume": [19, 20, 21, 41, 42, 43],
-    "saegewerk": [0, 19, 20, 21, 22, 41, 42, 43],
-}
-
 
 class KMKKeyboard(_KMKKeyboard):
     def __init__(
-        self,
-        klor_variant="saegewerk",
-        klor_rgb="none",
-        klor_oled=False,
-        klor_speaker=False,
+        self
     ):
         # create and register the scanner(s)
         self.matrix = [
@@ -99,9 +87,7 @@ class KMKKeyboard(_KMKKeyboard):
         )
         self.modules.append(split)
         
-        self.setup_oled(klor_oled)
-        self.setup_speaker(klor_speaker)
-        self.setup_rgb(klor_variant, klor_rgb)
+        self.setup_rgb()
     
     #VARIABLES----------------------------------------------------------------------------------------------------------------------
     analogPins = (      #analog pins from which values are read
@@ -114,10 +100,10 @@ class KMKKeyboard(_KMKKeyboard):
     
     analogKeyAttribut = [ #choose per key modes and values (positive means threshold negativ means rapid trigger
         [
-            50000,50000,50000,50000,50000,50000,
-            50000,50000,50000,50000,50000,50000,
-            50000,50000,50000,50000,50000,50000,
-                        50000,50000,50000,50000,
+            -50000,-50000,-50000,-50000,-50000,-50000,
+            -50000,-50000,-50000,-50000,-50000,-50000,
+            -50000,-50000,-50000,-50000,-50000,-50000,
+                          -50000,-50000,-50000,-50000,
             0,0,0,0,0,0,#dont change zeros
             50000,50000,50000,50000,50000,50000,
             50000,50000,50000,50000,50000,50000,
@@ -147,66 +133,9 @@ class KMKKeyboard(_KMKKeyboard):
     encoder2_a = pins[14]
     encoder2_b = pins[15]
     
-    SCL = None 
-    SDA = None
     rx = pins[1]
     tx = pins[0]
-    buzzer_pin = None
-    rgb_pixel_pin = pins[23] #LED pin
-
-    # OLED Code:
-    def setup_oled(self, klor_oled):
-        if klor_oled == True:
-            from kmk.extensions.peg_oled_Display import (
-                Oled,
-                OledDisplayMode,
-                OledReactionType,
-                OledData,
-            )
-
-            # --8<-- [start:oled]
-            oled_ext = Oled(
-                OledData(
-                    corner_one={
-                        0: OledReactionType.STATIC,
-                        1: ["Layer"],
-                    },
-                    corner_two={
-                        0: OledReactionType.LAYER,
-                        1: ["0", "1", "2"],
-                    },
-                    corner_three={
-                        0: OledReactionType.LAYER,
-                        1: ["BASE", "RAISE", "LOWER"],
-                    },
-                    corner_four={
-                        0: OledReactionType.LAYER,
-                        1: ["qwerty", "nums", "sym"],
-                    },
-                ),
-                toDisplay=OledDisplayMode.TXT,
-                flip=True,
-                # oHeight=64,
-            )
-            # --8<-- [end:oled]
-            self.extensions.append(oled_ext)
-
-    # Speaker Code:
-    def setup_speaker(self, klor_speaker):
-        if klor_speaker == True:
-            import digitalio
-            import pwmio
-            import time
-
-            buzzer = pwmio.PWMOut(self.buzzer_pin, variable_frequency=True)
-            OFF = 0
-            ON = 2**15
-            buzzer.duty_cycle = ON
-            buzzer.frequency = 2000
-            time.sleep(0.2)
-            buzzer.frequency = 1000
-            time.sleep(0.2)
-            buzzer.duty_cycle = OFF
+    rgb_pixel_pin = pins[16] #LED pin
 
     # Basic RGB code:
     def basic_rgb(self, pixels):
@@ -236,33 +165,22 @@ class KMKKeyboard(_KMKKeyboard):
         )
         self.extensions.append(rgb_ext)
 
-    # "Calculate" the RGB data for a specifig KLOR variant:
-    def trim_display(self, pos_rgb, cut):
-        return [d for (p, d) in pos_rgb if p not in cut]
-
-    # "Calculate" the position data for a specifig KLOR variant:
+    # "Calculate" the position data
     def trim_pos(self, pos_rgb, cut):
         cut_pos = [p for (p, d) in pos_rgb if p not in cut]
         old_to_new = {old: new for new, old in enumerate(sorted(cut_pos))}
         return [old_to_new[p] for p in cut_pos]
 
     # Setup for peg_rgb or basic_rgb:
-    def setup_rgb(self, klor_variant, klor_rgb):
-        if klor_rgb == "peg_rgb":
-
-            self.brightness_limit = 0.3
-            # Exctract and trim the position data from the pos_rgb tuple according to a KLOR variant:
-            self.led_key_pos = self.trim_pos(pos_rgb, cuts[klor_variant])
+    def setup_rgb(self):
+            self.brightness_limit = 0.1
+            # Exctract and trim the position data from the pos_rgb tuple 
+            self.led_key_pos = self.trim_pos(pos_rgb, [])
             # Return the number of items in the exctracted and trimmed data from above:
-            self.num_pixels = len(self.led_key_pos)
-            # Pass the specifig [R, G, B] data for a KLOR variant via 'led_display' into peg_rgb():
-            self.peg_rgb(self.trim_display(pos_rgb, cuts[klor_variant]))
-
-        if klor_rgb == "basic_rgb":
-            # In basic RGB implementation you only pass the LED count per side not the total of both sides:
-            half_pos = len(self.trim_pos(pos_rgb, cuts[klor_variant])) // 2
-            # Pass the number of LEDs of one keyboard half via 'half_pos' into basic_rgb():
-            self.basic_rgb(pixels=(half_pos))
+            self.num_pixels = len(led_positions)
+            # Pass the specifig [R, G, B] data via 'led_display' into peg_rgb():
+            #self.peg_rgb(self.trim_display(pos_rgb, []))
+            self.peg_rgb(rgb_data)
 
     # NOQA
     # flake8: noqa

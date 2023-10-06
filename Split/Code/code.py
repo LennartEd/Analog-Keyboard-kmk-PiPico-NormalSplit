@@ -7,15 +7,10 @@ from kmk.extensions.media_keys import MediaKeys
 #from analog import Analog
 
 # fmt: off
-# ↓ EDIT CONFIG HERE ↓
-klor_variant = "polydactyl"  # Options: "polydactyl", "konrad", "yubitsume", "saegewerk"
-klor_rgb = "peg_rgb"        # Options: "basic_rgb", "peg_rgb", "none"
-klor_oled = False           # Options: True, False
-klor_speaker = False        # Options: True, False
-# ↑ EDIT CONFIG HERE ↑
+
 # fmt: on
 
-keyboard = KMKKeyboard(klor_variant, klor_rgb, klor_oled, klor_speaker)
+keyboard = KMKKeyboard()
 
 #keyboard.modules.append(Analog())
 keyboard.modules.append(Layers())
@@ -32,7 +27,7 @@ _____ = KC.TRNS
 RAISE = KC.MO(1)
 LOWER = KC.MO(0)
 
-# Keymap dd
+# Keymap 
 # fmt: off
 keyboard.keymap = [
     [
@@ -68,7 +63,7 @@ keyboard.keymap = [
                                                                 #encoder btn
                                                             KC.N1,           KC.N1,
                                                             KC.N2,           KC.N2,
-        # Encoders
+        # Encoders 
         KC.A,    # encoder 1 left side
         KC.B,    # encoder 1 left side
         KC.C,    # encoder 1 Right side
@@ -79,20 +74,7 @@ keyboard.keymap = [
         KC.G,    # encoder 2 right side
         KC.H,    # encoder 2 right side
     ],
-    [
-       #LOWER
-       #     |        |        |        |        |        |        | |        |        |        |        |        |        |        |
-               KC.EXLM,   KC.AT, KC.HASH,  KC.DLR, KC.PERC,                     KC.CIRC, KC.AMPR, KC.ASTR, KC.LPRN, KC.RPRN,           \
-      _______,  KC.ESC, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,                     xxxxxxx, KC.UNDS, KC.PLUS, KC.LBRC, KC.RBRC, _______,  \
-      _______, KC.CAPS, KC.TILD, xxxxxxx, xxxxxxx, xxxxxxx, KC.MUTE,   KC.MPLY, xxxxxxx, xxxxxxx, xxxxxxx, KC.PIPE,  KC.DQT, _______,  \
-                        xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,                     xxxxxxx,  KC.ENT, xxxxxxx,  KC.DEL,
-
-        # Encoders
-        KC.AUDIO_VOL_UP,      #Left side clockwise
-        KC.AUDIO_VOL_DOWN,    #Left side counterclockwise
-        KC.MEDIA_NEXT_TRACK,  #Right side clockwise
-        KC.MEDIA_PREV_TRACK,  #Right side counterclockwise
-    ],
+    
 ]
 # fmt: onl
 
