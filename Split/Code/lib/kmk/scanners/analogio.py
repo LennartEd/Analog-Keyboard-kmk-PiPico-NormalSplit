@@ -13,24 +13,22 @@ keyboard = KMKKeyboard()
 
 class AnalogScanner(Scanner):
     def __init__(self,inPins, outPins,numOfKeys,analogAttrib):
-        self.inPins = [analogio.AnalogIn(pin) for pin in inPins]
-        self.outPins = [digitalio.DigitalInOut(pin) for pin in outPins]
+         
+        self.inPins = [analogio.AnalogIn(pin) for pin in inPins] #setup pins where analog signals are read
+        
+        self.outPins = [digitalio.DigitalInOut(pin) for pin in outPins] #setup pins to controll multiplexers
         for pin in self.outPins:
             pin.direction = digitalio.Direction.OUTPUT
         
-        self.aValold = [0]*16*len(inPins)
-        self.aVal = [0]*16*len(inPins)
-        self.que = []
+        self.aVal = [self.inPins[0].value]*16*len(inPins) #array to store current value
+        self.aValold = [self.inPins[0].value]*16*len(inPins) #array to store last value
+        self.que = [] #que to store keys which have to be pressed
         
-        self.pressed = [False]*16*len(inPins)
-        self.numOfKeys = numOfKeys
+        self.pressed = [False]*16*len(inPins) #array to store state of keys 
+        self.numOfKeys = numOfKeys #number of keys
         
-        self.analogAttrib = analogAttrib
-        
-        self.I = 0
-        self.st = 0
-        self.end = 0
-            
+        self.analogAttrib = analogAttrib #per key info about threshold/press type
+               
     @property
     def key_count(self):
         return self.numOfKeys
@@ -41,47 +39,41 @@ class AnalogScanner(Scanner):
         or a KeyEvent object if the pin value exceeds the threshold.
         '''
         
-        if len(self.que) == 0:
+        if len(self.que) == 0: #if no key is in que
             for i in range(16): #cycles through multiplexer
                 self.outPins[0].value = (i & 0b0001) != 0
                 self.outPins[1].value = (i & 0b0010) != 0
                 self.outPins[2].value = (i & 0b0100) != 0
                 self.outPins[3].value = (i & 0b1000) != 0
-                for index, j in enumerate(self.inPins):    #reads multiplexers and stored thier values
+                for index, j in enumerate(self.inPins):    #read and stored analog values
                     self.aVal[i + 16 * index] = j.value
             
-            for i in range(self.numOfKeys):
-                
-                if self.analogAttrib[keyboard.active_layers[0]][i + self.offset] > 0: #threshold mode
+            for i in range(self.numOfKeys): #checks if values have changed
+                #threshold mode
+                if self.analogAttrib[keyboard.active_layers[0]][i + self.offset] > 0:
                     if self.aVal[i] > self.analogAttrib[keyboard.active_layers[0]][i + self.offset] and self.pressed[i] == False:
                         self.pressed[i] = True
                         self.que.append(i)
                     elif self.aVal[i] < self.analogAttrib[keyboard.active_layers[0]][i + self.offset] and self.pressed[i] == True:
                         self.pressed[i] = False
                         self.que.append(i)
-                        
-                elif self.analogAttrib[keyboard.active_layers[0]][i + self.offset] < 0: #rapid trigger mode
-                    print("rapid trigger not implemented")
+                #rapid trigger mode      
+                elif self.analogAttrib[keyboard.active_layers[0]][i + self.offset] < 0: 
+                    if self.aVal[i] > self.aValold[i] - abs(self.analogAttrib[keyboard.active_layers[0]][i + self.offset]):
+                        self.aValold[i] = self.aVal[i]
+                        if not self.pressed[i]:
+                            self.pressed[i] = True
+                            self.que.append(i)
+                    elif self.aVal[i] < self.aValold[i] + abs(self.analogAttrib[keyboard.active_layers[0]][i + self.offset]):
+                        self.aValold[i] = self.aVal[i]
+                        if self.pressed[i]:
+                            self.pressed[i] = False
+                            self.que.append(i)
                      
-        elif len(self.que) > 0:
+        elif len(self.que) > 0: #if keys in que: remove one from que and send return
             temp = self.que.pop(0)
-            #print(temp + self.offset, self.pressed[temp])
             return keypad.Event(temp+self.offset, self.pressed[temp])
-            
-                
-        
-        """
-        #for time messuring
-        self.I += 1
-        if self.I % 2 == 0:
-            self.st = time.monotonic_ns()
-        elif self.I % 2 == 1:
-            self.end = time.monotonic_ns()
-            print((self.end-self.st)/1000000)
-        """
-        #print("hi")
-        #return keypad.Event(35,True)
-        #print("js")
+
             
         
         

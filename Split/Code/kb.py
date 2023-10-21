@@ -9,31 +9,22 @@ from kmk.scanners.analogio import AnalogScanner
 from kmk.scanners.encoder import RotaryioEncoder
 from kmk.scanners.encoder2 import RotaryioEncoder2
 
-
-
 # from kmk.extensions.peg_rgb_matrix import Color
 
-# fmt: off
-# DO NOT EDIT 'led_positions':
+#LED order
 led_positions = [
     19, 18, 13, 12,  6,  5,                  27, 28, 34, 35, 40, 41,
     20, 17, 14, 11,  7,  4,                  26, 29, 33, 36, 39, 42,
     21, 16, 15, 10,  8,  3,                  25, 30, 32, 37, 38, 43,
                      9,  2, 1, 0,    22, 23, 24, 31,
 ]
-# fmt: on
 
-# fmt: off
-# --8<-- [start:rgbdata]
-# EDIT your [R, G, B] values below
 rgb_data = [
     [0, 0, 255], [0, 191, 255], [0, 255, 128], [63, 255, 0], [254, 255, 0], [251, 64, 0],                                                              [251, 64, 0], [254, 255, 0], [63, 255, 0], [0, 255, 128], [0, 191, 255], [0, 0, 255],
     [0, 0, 255], [0, 191, 255], [0, 255, 128], [63, 255, 0], [254, 255, 0], [251, 64, 0],                                                              [251, 64, 0], [254, 255, 0], [63, 255, 0], [0, 255, 128], [0, 191, 255], [0, 0, 255],
     [0, 0, 255], [0, 191, 255], [0, 255, 128], [63, 255, 0], [254, 255, 0], [251, 64, 0],                                                              [251, 64, 0], [254, 255, 0], [63, 255, 0], [0, 255, 128], [0, 191, 255], [0, 0, 255],
                                                              [254, 255, 0], [251, 64, 0], [247, 0, 0], [255,0,0],        [188, 0, 249], [247, 0, 122],[251, 64, 0], [254, 255, 0],
 ]
-# --8<-- [end:rgbdata]
-# fmt: on
 
 # Creates a tuple containing both LED position and RGB data
 pos_rgb = [(x, y) for x, y in zip(led_positions, rgb_data)]
@@ -89,21 +80,18 @@ class KMKKeyboard(_KMKKeyboard):
         
         self.setup_rgb()
     
-    #VARIABLES----------------------------------------------------------------------------------------------------------------------
-    analogPins = (      #analog pins from which values are read
-    pins[29],pins[28],
-    )
-    outPins = (        #digital pins to controll multiplexers
-    pins[2],pins[3],pins[4],pins[5]
-    )
-    numberOfKeys = 22  #number of analog keys
+    analogPins = ( pins[29],pins[28])  #analog pins from which values are read
+    
+    outPins = (pins[2],pins[3],pins[4],pins[5]) #pins to control the multiplexers
+    
+    numberOfKeys = 22  #number of analog keys (per side if its split)
     
     analogKeyAttribut = [ #choose per key modes and values (positive means threshold negativ means rapid trigger
         [
-            -50000,-50000,-50000,-50000,-50000,-50000,
-            -50000,-50000,-50000,-50000,-50000,-50000,
-            -50000,-50000,-50000,-50000,-50000,-50000,
-                          -50000,-50000,-50000,-50000,
+            50000,50000,50000,50000,50000,50000,
+            50000,50000,50000,50000,50000,50000,
+            50000,50000,50000,50000,50000,50000,
+                        50000,50000,50000,50000,
             0,0,0,0,0,0,#dont change zeros
             50000,50000,50000,50000,50000,50000,
             50000,50000,50000,50000,50000,50000,
@@ -141,7 +129,6 @@ class KMKKeyboard(_KMKKeyboard):
     def basic_rgb(self, pixels):
         from kmk.extensions.RGB import RGB
 
-        # --8<-- [start:rgb]
         rgb = RGB(
             pixel_pin=self.rgb_pixel_pin,
             num_pixels=pixels,
@@ -150,7 +137,7 @@ class KMKKeyboard(_KMKKeyboard):
             sat_default=100,
             val_default=20,
         )
-        # --8<-- [end:rgb]
+        
         self.extensions.append(rgb)
 
     # PEG_RGB code (per key RGB):
@@ -182,9 +169,6 @@ class KMKKeyboard(_KMKKeyboard):
             #self.peg_rgb(self.trim_display(pos_rgb, []))
             self.peg_rgb(rgb_data)
 
-    # NOQA
-    # flake8: noqa
-    # fmt: off
     coord_mapping = [
         0,  1,  2,  3,  4,  5,         33, 32, 31, 30, 29, 28,
         6,  7,  8,  9, 10, 11,         39, 38, 37, 36, 35, 34,
@@ -195,4 +179,4 @@ class KMKKeyboard(_KMKKeyboard):
                        24, 25,         53, 52,
                        26, 27,         55, 54,
     ]
-    # fmt: on
+    

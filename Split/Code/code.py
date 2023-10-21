@@ -3,23 +3,15 @@ from kb import KMKKeyboard
 from kmk.keys import KC
 from kmk.modules.layers import Layers
 from kmk.extensions.media_keys import MediaKeys
-#from test import test
-#from analog import Analog
-
-# fmt: off
-
-# fmt: on
 
 keyboard = KMKKeyboard()
 
-#keyboard.modules.append(Analog())
+
 keyboard.modules.append(Layers())
 keyboard.extensions.append(MediaKeys())
-#keyboard.extensions.append(test())
 
 # Enable debugging: http://kmkfw.io/docs/debugging/
 # keyboard.debug_enabled = True 
-
 
 # Key aliases
 xxxxx = KC.NO
@@ -76,7 +68,7 @@ keyboard.keymap = [
     ],
     
 ]
-# fmt: onl
+# fmt: on
 
 if __name__ == "__main__":
     keyboard.go()
