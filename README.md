@@ -7,8 +7,8 @@ This is a fully analog keyboard using magnetic keys and hall sensors. I'm using 
 - [x] Analog multiplexer implementation
 - [x] Multiplexer send key strokes
 - [x] Threshold mode
-- [ ] Rapid trigger mode
-- [ ] test on prototype
+- [x] Rapid trigger mode
+- [x] test on prototype
 - [ ] Create PCB's
 - [ ] Create Case
 

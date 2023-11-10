@@ -13,6 +13,7 @@ keyboard.extensions.append(MediaKeys())
 # Enable debugging: http://kmkfw.io/docs/debugging/
 # keyboard.debug_enabled = True 
 
+
 # Key aliases
 xxxxx = KC.NO
 _____ = KC.TRNS
@@ -26,15 +27,15 @@ keyboard.keymap = [
        #BASE
         
        #     |        |        |        |        |        |        | |        |        |        |        |        |        |        |
-        KC.Q,     KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                        KC.Y,    KC.U,    KC.I,    KC.O,    KC.P,    KC.EQL, 
-        KC.CAPS,  KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                        KC.H,    KC.J,    KC.K,    KC.L,    KC.SCLN, KC.ENT,  
-        KC.LSFT,  KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                        KC.N,    KC.M,    KC.COMM, KC.DOT,  KC.SLSH, KC.RSFT,  
-                           KC.LCTR, KC.LALT, KC.SPC,  RAISE,                       KC.N7,   KC.N6,   KC.N7,   KC.N9,
+        KC.Q,     KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                                 KC.Y,    KC.U,    KC.I,    KC.O,    KC.P,    KC.E, 
+        KC.CAPS,  KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                                 KC.H,    KC.J,    KC.K,    KC.L,    KC.SCLN, KC.ENT,  
+        KC.LSFT,  KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                                 KC.N,    KC.M,    KC.COMM, KC.DOT,  KC.SLSH, KC.RSFT,  
+                                             KC.A, KC.H, KC.P,  KC.Z,     KC.N7,   KC.N6,   KC.N7,   KC.N9,
                                                             
                                                                 #encoder btn
                                                             KC.N1,           KC.N1,
                                                             KC.N2,           KC.N2,
-        # Encoders
+        # Encoders 
         KC.A,    # encoder 1 left side
         KC.B,    # encoder 1 left side
         KC.C,    # encoder 1 Right side
@@ -47,7 +48,7 @@ keyboard.keymap = [
     ],
     [
        #RAISE
-        KC.Q,     KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                        KC.Y,    KC.U,    KC.I,    KC.O,    KC.P,    KC.EQL, 
+        KC.Q,     KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                        KC.Y,    KC.U,    KC.I,    KC.O,    KC.P,    KC.E, 
         KC.CAPS,  KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                        KC.H,    KC.J,    KC.K,    KC.L,    KC.SCLN, KC.ENT,  
         KC.LSFT,  KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                        KC.N,    KC.M,    KC.COMM, KC.DOT,  KC.SLSH, KC.RSFT,  
                            KC.LCTR, KC.LALT, KC.SPC,  RAISE,                       KC.N7,   KC.N6,   KC.N7,   KC.N9,
@@ -60,7 +61,6 @@ keyboard.keymap = [
         KC.B,    # encoder 1 left side
         KC.C,    # encoder 1 Right side
         KC.D,    # encoder 1 Right side
-        
         KC.E,    # encoder 2 left side
         KC.F,    # encoder 2 left side
         KC.G,    # encoder 2 right side

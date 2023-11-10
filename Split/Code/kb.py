@@ -39,6 +39,7 @@ class KMKKeyboard(_KMKKeyboard):
             AnalogScanner(
                 inPins = self.analogPins,
                 outPins = self.outPins,
+                multiNum = self.multiplexer,
                 numOfKeys = self.numberOfKeys,
                 analogAttrib = self.analogKeyAttribut
             ),
@@ -74,40 +75,48 @@ class KMKKeyboard(_KMKKeyboard):
             uart_interval=1,  # Sets the uarts delay. Lower numbers draw more power
             data_pin=self.rx,  # The primary data pin to talk to the secondary device with
             data_pin2=self.tx,  # Second uart pin to allow 2 way communication
+            uart_flip = False,
             use_pio=True,  # Use RP2040 PIO implementation of UART. Required if you want to use other pins than RX/TX
         )
         self.modules.append(split)
         
         self.setup_rgb()
     
-    analogPins = ( pins[29],pins[28])  #analog pins from which values are read
+    analogPins = (      #analog pins from which values are read
+    pins[27],pins[26],
+    )
+    outPins = (pins[15],pins[14],pins[13],pins[12]) #pins to control the multiplexers
     
-    outPins = (pins[2],pins[3],pins[4],pins[5]) #pins to control the multiplexers
+    multiplexer = 16 #number of input pins of the multiplexer
     
     numberOfKeys = 22  #number of analog keys (per side if its split)
     
     analogKeyAttribut = [ #choose per key modes and values (positive means threshold negativ means rapid trigger
         [
-            50000,50000,50000,50000,50000,50000,
-            50000,50000,50000,50000,50000,50000,
-            50000,50000,50000,50000,50000,50000,
-                        50000,50000,50000,50000,
-            0,0,0,0,0,0,#dont change zeros
-            50000,50000,50000,50000,50000,50000,
-            50000,50000,50000,50000,50000,50000,
-            50000,50000,50000,50000,50000,50000,
-                        50000,50000,50000,50000,
+            -2000,2000,2000,2000,2000,2000,
+            2000,2000,2000,2000,2000,2000,
+            2000,2000,2000,2000,2000,2000,
+                                2000,2000,2000,
+                                          2000,
+            
+            0,0,0,0,0,0,
+            
+            2000,2000,2000,2000,2000,2000,
+            2000,2000,2000,2000,2000,2000,
+            2000,2000,2000,2000,2000,2000,
+                                2000,2000,2000,
+                                          2000,
         ],
         [
-            50000,50000,50000,50000,50000,50000,
-            50000,50000,50000,50000,50000,50000,
-            50000,50000,50000,50000,50000,50000,
-                        50000,50000,50000,50000,
+            0,0,0,0,0,0,
+            0,0,0,0,0,0,
+            0,0,0,0,0,0,
+                        0,0,0,0,
             0,0,0,0,0,0,#dont change zeros
-            50000,50000,50000,50000,50000,50000,
-            50000,50000,50000,50000,50000,50000,
-            50000,50000,50000,50000,50000,50000,
-                        50000,50000,50000,50000,
+            0,0,0,0,0,0,
+            0,0,0,0,0,0,
+            0,0,0,0,0,0,
+                        0,0,0,0,
         ],
     
     ]
@@ -115,11 +124,11 @@ class KMKKeyboard(_KMKKeyboard):
     encoderBtnPins = [pins[6],pins[7]] #pins for the encoder buttons
     
     #encoder1 pins
-    encoder1_a = pins[12] 
-    encoder1_b = pins[13]
+    encoder1_a = pins[11] 
+    encoder1_b = pins[10]
     #encoder2 pins
-    encoder2_a = pins[14]
-    encoder2_b = pins[15]
+    encoder2_a = pins[9]
+    encoder2_b = pins[8]
     
     rx = pins[1]
     tx = pins[0]
