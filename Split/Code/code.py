@@ -24,13 +24,12 @@ LOWER = KC.MO(0)
 # fmt: off
 keyboard.keymap = [
     [
-       #BASE
-        
+       #TrashBase !!change to real one
        #     |        |        |        |        |        |        | |        |        |        |        |        |        |        |
-        KC.Q,     KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                                 KC.Y,    KC.U,    KC.I,    KC.O,    KC.P,    KC.E, 
-        KC.CAPS,  KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                                 KC.H,    KC.J,    KC.K,    KC.L,    KC.SCLN, KC.ENT,  
-        KC.LSFT,  KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                                 KC.N,    KC.M,    KC.COMM, KC.DOT,  KC.SLSH, KC.RSFT,  
-                                             KC.A, KC.H, KC.P,  KC.Z,     KC.N7,   KC.N6,   KC.N7,   KC.N9,
+        KC.Q,     KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                                          KC.Y,    KC.U,    KC.I,    KC.O,    KC.P,    KC.E, 
+        KC.CAPS,  KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                                          KC.H,    KC.J,    KC.K,    KC.L,    KC.SCLN, KC.ENT,  
+        KC.LSFT,  KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                                          KC.N,    KC.M,    KC.COMM, KC.DOT,  KC.SLSH, KC.RSFT,  
+                                             KC.A, KC.H, KC.SPACE,RAISE,            KC.N7,   KC.N6,   KC.N7,   KC.N9,
                                                             
                                                                 #encoder btn
                                                             KC.N1,           KC.N1,
@@ -48,10 +47,10 @@ keyboard.keymap = [
     ],
     [
        #RAISE
-        KC.Q,     KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                        KC.Y,    KC.U,    KC.I,    KC.O,    KC.P,    KC.E, 
+        KC.N1,     KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                        KC.Y,    KC.U,    KC.I,    KC.O,    KC.P,    KC.E, 
         KC.CAPS,  KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                        KC.H,    KC.J,    KC.K,    KC.L,    KC.SCLN, KC.ENT,  
         KC.LSFT,  KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                        KC.N,    KC.M,    KC.COMM, KC.DOT,  KC.SLSH, KC.RSFT,  
-                           KC.LCTR, KC.LALT, KC.SPC,  RAISE,                       KC.N7,   KC.N6,   KC.N7,   KC.N9,
+                           KC.LCTR, KC.LALT, KC.SPC,  _____,                       KC.N7,   KC.N6,   KC.N7,   KC.N9,
                                                             
                                                                 #encoder btn
                                                             KC.N1,           KC.N1,
