@@ -22,9 +22,13 @@ In the future i might create v2 template that fixes the flaws
 
 #### Part notes
 Hall sensor: 
+
 Multiplexer: Curently any 16to1 Multiplexer should work (giving you 64 keys). If you are not hand soldering i recommend choosing a smaller sized one. Larger (32to1) should also work.
+
 MCU: Any circuitpython compatible board should work. You just have to change the footprint on the PCB (which you should do anyway. See "Flaws with v1"
+
 TRRS jack: 
+
 Capacitor: Capacitors are not strictly nesesary but improve resulution. I tryed a few and found that 100uF worked the best.
 
 #### How it works
@@ -50,6 +54,7 @@ into other files you can just use "pins[x]" to reference pins
 
 #### kb.py:
 Here you define most variables for you specific board.
+
 
 #### Code.py
 
