@@ -8,7 +8,8 @@ This is my first experience with circuitpython so code might me wonky.
 **!DONT USE THE PCB PROVIDED!**
 The PCB provided has some flaws that make it hard to work with.
 **I would recommend making your own PCB and using mine as a template.**
-In the future i might create v2 template that fixes the flaws
+In the future i might create v2 template that fixes the flaws.
+As LCSC didn't have the LEDs in stock, I build mine without them. So there is no guaranty that I did the LED wiring correctly. I did however test the code with the onboard led of the RP2040, so the code should work.
 
 #### Parts
 |Description | Part          | LCSC         |
@@ -18,6 +19,7 @@ In the future i might create v2 template that fixes the flaws
 | TRRS jack  | PJ-3220-5A	 | C707251		|
 | MCU		 | Waveshare RP2040-zero| --	|
 | Capacitor 100uF| GRM21BR60J107ME15L| C141660|
+|(LED)       |sk6812 mini-e  | C5149201     |
 
 
 #### Part notes
@@ -29,7 +31,7 @@ In the future i might create v2 template that fixes the flaws
 
 **TRRS jack:** 
 
-Capacitor: Capacitors are not strictly necessary but improve resolution. I tried a few and found that 100uF worked the best.
+**Capacitor:** Capacitors are not strictly necessary but improve resolution. I tried a few and found that 100uF worked the best.
 
 #### How it works
 The position of the magnet in the switch is red by the hall-effect sensor. Because the pi-pico only has 4 ADCs we need multiplexers to cycle between the sensors. 
