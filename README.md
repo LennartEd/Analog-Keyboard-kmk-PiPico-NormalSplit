@@ -7,7 +7,7 @@ This is my first experience with circuitpython so code might me wonky.
 ## PCB
 **!DONT USE THE PCB PROVIDED!**
 The PCB provided has some flaws that make it hard to work with.
-**I would recomend making your own PCB and using mine as a template.**
+**I would recommend making your own PCB and using mine as a template.**
 In the future i might create v2 template that fixes the flaws
 
 #### Parts
@@ -21,31 +21,31 @@ In the future i might create v2 template that fixes the flaws
 
 
 #### Part notes
-Hall sensor: 
+**Hall sensor:** 
 
-Multiplexer: Curently any 16to1 Multiplexer should work (giving you 64 keys). If you are not hand soldering i recommend choosing a smaller sized one. Larger (32to1) should also work.
+**Multiplexer:** Currently any 16to1 Multiplexer should work (giving you 64 keys). If you are not hand soldering i recommend choosing a smaller sized one. Larger (32to1) should also work.
 
-MCU: Any circuitpython compatible board should work. You just have to change the footprint on the PCB (which you should do anyway. See "Flaws with v1"
+**MCU:** Any circuitpython compatible board should work. You just have to change the footprint on the PCB (which you should do anyway. See "Flaws with v1"
 
-TRRS jack: 
+**TRRS jack:** 
 
-Capacitor: Capacitors are not strictly nesesary but improve resulution. I tryed a few and found that 100uF worked the best.
+Capacitor: Capacitors are not strictly necessary but improve resolution. I tried a few and found that 100uF worked the best.
 
 #### How it works
 The position of the magnet in the switch is red by the hall-effect sensor. Because the pi-pico only has 4 ADCs we need multiplexers to cycle between the sensors. 
 
 #### Flaws with v1
-- dont solder MCU doughterboard onto PCB directly
-- bigger pads for handsoldering
+- dont solder MCU daughter board onto PCB directly
+- bigger pads for hand soldering
 - more mounting holes
-- if posible 2 layer PCB for cost saving
+- if possible 2 layer PCB for cost saving
 
 
 ## Code
 To install the code connect your board and install circuitpython. Then copy the content of the "code" folder into the board. For editing the code you can use Thonny or any text editor.
 
 #### pins
-To make life easyer by not having to use "board.GP.." all the time, create (if not already present) a python file in lib/kmk/quickpin. Then add all the pins (see the other files for reference).
+To make life easier by not having to use "board.GP.." all the time, create (if not already present) a python file in lib/kmk/quickpin. Then add all the pins (see the other files for reference).
 Now when imported with 
 ~~~
 from kmk.quickpin.<boardTypeFolder>.<boardPins> import pinout as pins
@@ -65,8 +65,3 @@ Here you define most variables for you specific board.
 #### analogio.py
 
 ## Case
-
-
-
-
-
