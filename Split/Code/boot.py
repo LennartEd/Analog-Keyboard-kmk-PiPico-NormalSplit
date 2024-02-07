@@ -1,5 +1,4 @@
 """
-
 import board
 import digitalio
 import storage
@@ -17,5 +16,4 @@ if button.value:
     usb_hid.enable(boot_device=1) # Enables keyboard before OS boot
     
 button.deinit()
-
 """

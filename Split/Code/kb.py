@@ -1,5 +1,5 @@
 
-from kmk.quickpin.RP2040.waveshareRP2040zero import pinout as pins
+from kmk.quickpin.RP2040.YD_RP2040 import pinout as pins
 #from kmk.quickpin.pro_micro.sparkfun_promicro_rp2040 import pinout as pins
 from kmk.kmk_keyboard import KMKKeyboard as _KMKKeyboard
 from kmk.scanners import DiodeOrientation
@@ -23,7 +23,7 @@ rgb_data = [
     [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0],                                                              [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], 
     [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0],                                                              [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], 
     [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0],                                                              [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], 
-                                                [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 50, 50],               [0, 50, 50],[0, 0, 0], [0, 0, 0], [0, 0, 0],
+                                                [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 25, 25],               [0, 25, 25],[0, 0, 0], [0, 0, 0], [0, 0, 0],
 ]
 
 # Creates a tuple containing both LED position and RGB data
@@ -36,6 +36,7 @@ class KMKKeyboard(_KMKKeyboard):
     ):
         # create and register the scanner(s)
         self.matrix = [
+            
             AnalogScanner(
                 inPins = self.analogPins,
                 outPins = self.outPins,
@@ -45,13 +46,13 @@ class KMKKeyboard(_KMKKeyboard):
             ),
             
             KeysScanner(
-            # require argument:
-            pins=self.encoderBtnPins,
-            # optional arguments with defaults:
-            value_when_pressed=False,
-            pull=True,
-            interval=0.02,  # Debounce time in floating point seconds
-            max_events=64
+                # require argument:
+                pins=self.encoderBtnPins,
+                # optional arguments with defaults:
+                value_when_pressed=False,
+                pull=True,
+                interval=0.02,  # Debounce time in floating point seconds
+                max_events=64
             ),
             RotaryioEncoder(
                 pin_a=self.encoder1_a,
@@ -141,7 +142,7 @@ class KMKKeyboard(_KMKKeyboard):
         ],
     ]
     
-    encoderBtnPins = [pins[6],pins[7]] #pins for the encoder buttons
+    encoderBtnPins = [pins[7]] #pins for the encoder buttons
     
     #encoder1 pins
     encoder1_a = pins[11] 
@@ -199,13 +200,13 @@ class KMKKeyboard(_KMKKeyboard):
             self.peg_rgb(rgb_data)
 
     coord_mapping = [
-        0,  1,  2,  3,  4,  5,         33, 32, 31, 30, 29, 28,
-        6,  7,  8,  9, 10, 11,         39, 38, 37, 36, 35, 34,
-       12, 13, 14, 15, 16, 17,         45, 44, 43, 42, 41, 40,
-               18, 19, 20, 21,         49, 48, 47, 46,
-                              22,   50,
-                              23,   51,
-                       24, 25,         53, 52,
-                       26, 27,         55, 54,
+        0,  1,  2,  3,  4,  5,         32, 31, 30, 29, 28, 27,
+        6,  7,  8,  9, 10, 11,         38, 37, 36, 35, 34, 33,
+       12, 13, 14, 15, 16, 17,         44, 43, 42, 41, 40, 39,
+               18, 19, 20, 21,         48, 47, 46, 45,
+                              22,   49,
+                              
+                       23, 24,         51, 50,
+                       25, 26,         53, 52,
     ]
     

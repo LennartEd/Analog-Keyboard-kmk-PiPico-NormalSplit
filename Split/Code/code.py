@@ -5,7 +5,7 @@ from kmk.modules.layers import Layers
 from kmk.extensions.media_keys import MediaKeys
 from kmk.modules.holdtap import HoldTap
 from kmk.modules.mouse_keys import MouseKeys
-
+from kmk.handlers.sequences import send_string, simple_key_sequence
 
 
 keyboard = KMKKeyboard()
@@ -24,81 +24,84 @@ keyboard.extensions.append(MediaKeys())
 # Key aliases
 xxxxx = KC.NO
 _____ = KC.TRNS
-TEM2 = KC.MO(2)
+T2 = KC.HT(KC.CAPS, KC.MO(1))
 L0 = KC.TG(0)
 L2 = KC.TG(2)
-N2 = KC.HT(KC.TG(2), KC.MO(1), prefer_hold=True, tap_interrupted=False, tap_time=None)
+N2 = KC.HT(KC.TG(2), KC.MO(1))
 N0 = KC.HT(KC.TG(0), KC.MO(1), prefer_hold=True, tap_interrupted=False, tap_time=None)
+nW = simple_key_sequence((KC.LALT(KC.TAB),KC.MPLY)) #KC.MACRO_SLEEP_MS(1000)
+pas = send_string("hi")
 
 # Keymap 
 # fmt: off bvb 
 keyboard.keymap = [
     [
-       #TrashBase !!change to real one 
+       #Default qwerty
        #     |        |        |        |        |        |        | |        |        |        |        |        |        |        |
         KC.ESC,  KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                                     KC.Y,    KC.U,    KC.I,    KC.O,    KC.P,   KC.LGUI, 
         KC.TAB,  KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                                    KC.H,    KC.J,    KC.K,    KC.L,    KC.SCLN, KC.DEL,  
         KC.DEL,  KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                                    KC.N,    KC.M,    KC.COMM, KC.DOT,  KC.SLSH, KC.RSFT,  
-                                            KC.LALT,KC.SPC,N2,KC.LCTL,                KC.ENT,KC.RCTL,KC.BSPC,   KC.LSFT,
+                                            N2,KC.SPC,KC.LALT,KC.LCTL,                KC.ENT,KC.RCTL,KC.BSPC,   KC.LSFT,
                                                             
                                                                 #encoder btn
-                                                            KC.N1,           KC.N1,
-                                                            KC.MPLY,           KC.N2,
+                                                                nW,                   KC.MPLY,
+                                                            
+                                                            
         #Encoder 1 (horizontal) 
-        KC.A,    # left encoder Clock
-        KC.B,    # left encoder counterClock
-        KC.C,    # right encoder Clock
-        KC.D,    # right encoder counterClock
+        KC.LEFT,    # left encoder Clock
+        KC.RIGHT,    # left encoder counterClock
+        KC.DOWN,    # right encoder Clock
+        KC.UP,    # right encoder counterClock
         
         #Encoder 2 (vertical)
-        KC.VOLU,    # left encoder Clock
-        KC.VOLD,    # left encoder counterClock
-        KC.MW_UP,    # right encoder Clock
-        KC.MW_DN,    # right encoder counterClock
+        KC.VOLD,    # left encoder Clock
+        KC.VOLU,    # left encoder counterClock
+        KC.MPRV,    # right encoder Clock
+        KC.MNXT,    # right encoder counterClock
     ],
     [
        #Numbers
-        _____,xxxxx,xxxxx,xxxxx,xxxxx,xxxxx,                                 xxxxx,xxxxx,xxxxx,xxxxx,xxxxx,_____, 
-        _____,KC.N0,KC.N1,KC.N2,KC.N3,KC.N4,                                 KC.N5,KC.N6,KC.N7,KC.N8,KC.N9,_____,  
-        _____,xxxxx,xxxxx,xxxxx,xxxxx,xxxxx,                                 KC.LEFT,KC.UP,KC.RIGHT,xxxxx,xxxxx,xxxxx,  
-                                _____,_____,_____,  _____,       _____,_____,_____,KC.DOWN,
+        _____,pas,KC.F1,KC.F2,KC.F3,KC.F4,                                 KC.F5,KC.F6,KC.F7,KC.F8,KC.F9,KC.F10, 
+        _____,KC.N0,KC.N1,KC.N2,KC.N3,KC.N4,                                 KC.N5,KC.N6,KC.N7,KC.N8,KC.N9,KC.F11,  
+        _____,xxxxx,xxxxx,xxxxx,xxxxx,KC.RALT,                                 KC.LEFT,KC.UP,KC.DOWN,KC.RIGHT,xxxxx,KC.F12,  
+                                _____,_____,_____,  _____,       _____,_____,_____,_____,
                                                             
-                                                                #encoder btn
-                                                            KC.N1,           KC.N1,
-                                                            KC.N2,           KC.N2,
-        #Encoder 1 (horizontal)
-        KC.A,    # left encoder Clock
-        KC.B,    # left encoder counterClock
-        KC.C,    # right encoder Clock
-        KC.D,    # right encoder counterClock 
+                                                #encoder btn
+                                                    nW,                   KC.MPLY,
+        #Encoder 1 (horizontal) 
+        _____,    # left encoder Clock
+        _____,    # left encoder counterClock
+        _____,    # right encoder Clock
+        _____,    # right encoder counterClock
         
         #Encoder 2 (vertical)
-        KC.VOLU,    # left encoder Clock 
-        KC.VOLD,    # left encoder counterClock
-        KC.MW_UP,    # right encoder Clock
-        KC.MW_DN,    # right encoder counterClock
+        _____,    # left encoder Clock
+        _____,    # left encoder counterClock
+        _____,    # right encoder Clock
+        _____,    # right encoder counterClock
     ],
     [
        #Gaming 
-        KC.ESC,KC.M,KC.Q, KC.W,KC.E,KC.R,                              xxxxx,xxxxx,  KC.UP,  xxxxx,   xxxxx,_____, 
-        KC.TAB,KC.LSFT,KC.A, KC.S,KC.D,KC.F,                            xxxxx,KC.LEFT,KC.DOWN,KC.RIGHT,xxxxx,_____,  
-        N0,KC.LCTL,xxxxx,KC.G,KC.N,KC.B,                                xxxxx,xxxxx,  xxxxx,  xxxxx,   xxxxx,xxxxx,  
-                            KC.N2,KC.SPC,KC.N1,KC.N4,         _____,_____,_____,_____,
+        KC.ESC,  KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                                     KC.Y,    KC.U,    KC.I,    KC.O,    KC.P,   KC.LGUI, 
+        KC.TAB,  KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                                    KC.H,    KC.J,    KC.K,    KC.L,    KC.SCLN, KC.DEL,  
+        KC.DEL,  KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                                    KC.N,    KC.M,    KC.COMM, KC.DOT,  KC.SLSH, KC.RSFT,  
+                                            N2,KC.SPC,KC.LALT,KC.LCTL,                KC.ENT,KC.RCTL,KC.BSPC,   KC.LSFT,
                                                             
                                                                 #encoder btn
-                                                            KC.N1,           KC.N1,
-                                                            KC.MPLY,           KC.N2,
+                                                                nW,                   KC.MPLY,
+                                                            
+                                                            
         #Encoder 1 (horizontal) 
-        KC.A,    # left encoder Clock
-        KC.B,    # left encoder counterClock
-        KC.C,    # right encoder Clock
-        KC.D,    # right encoder counterClock
+        _____,    # left encoder Clock
+        _____,    # left encoder counterClock
+        _____,    # right encoder Clock
+        _____,    # right encoder counterClock
         
         #Encoder 2 (vertical)
-        KC.VOLU,    # left encoder Clock
-        KC.VOLD,    # left encoder counterClock
-        KC.MW_UP,    # right encoder Clock
-        KC.MW_DN,    # right encoder counterClock
+        _____,    # left encoder Clock
+        _____,    # left encoder counterClock
+        _____,    # right encoder Clock
+        _____,    # right encoder counterClock
     ],
     
 ]
@@ -106,3 +109,4 @@ keyboard.keymap = [
 
 if __name__ == "__main__":
     keyboard.go()
+    
