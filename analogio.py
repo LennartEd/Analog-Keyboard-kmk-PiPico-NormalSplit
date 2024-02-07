@@ -9,7 +9,6 @@ from kmk.scanners import Scanner
 from kmk.modules import Module
 from kmk.kmk_keyboard import KMKKeyboard
 from kmk.keys import KC
-from hallCali import input_range, output_range
 
 keyboard = KMKKeyboard()
 
@@ -40,7 +39,7 @@ def remap_range(value, input_range, output_range):
 
 class AnalogScanner(Scanner):
     
-    def __init__(self,inPins,outPins,multiNum,numOfKeys,analogAttrib):
+    def __init__(self,inPins,outPins,multiNum,numOfKeys,analogAttrib,noise):
          
         self.inPins = [analogio.AnalogIn(pin) for pin in inPins] #setup pins where analog signals are read
         
@@ -59,8 +58,11 @@ class AnalogScanner(Scanner):
         
         self.analogAttrib = analogAttrib #per key info about threshold/press type
         
-        
-               
+        self.output_range = (0,4)
+        self.minMax = [[25000, 24000] for _ in range(22)]
+        self.noise = noise
+        #print(self.minMax)
+           
     @property
     def key_count(self):
         return self.numOfKeys
@@ -72,7 +74,8 @@ class AnalogScanner(Scanner):
         '''
         
         #print(self.offset)
-        if len(self.que) == 0: #if no key is in que 
+        if len(self.que) == 0: #if no key is in que
+            
             for i in range(self.multiNum): #cycles through multiplexer
                 self.outPins[0].value = (i & 0b0001) != 0
                 self.outPins[1].value = (i & 0b0010) != 0
@@ -81,12 +84,19 @@ class AnalogScanner(Scanner):
                 for index, j in enumerate(self.inPins):    #read and stored analog values
                     self.aVal[i + self.multiNum * index] = j.value
             
+            #print(self.aVal)
             for i in range(self.numOfKeys):
-                self.aVal[i] = remap_range(self.aVal[i], input_range[i+self.offset], output_range)
+                    
+                if self.aVal[i] > self.minMax[i][0]:
+                    self.minMax[i][0] = self.aVal[i]-self.noise
+                if self.aVal[i] < self.minMax[i][1]:
+                    self.minMax[i][1] = self.aVal[i]+self.noise
                 
+                self.aVal[i] = remap_range(self.aVal[i], self.minMax[i], self.output_range)
+                  
             for i in range(self.numOfKeys): #checks if values have changed
                 
-                #
+                #threshold mode
                 if self.analogAttrib[keyboard.active_layers[0]][i + self.offset] > 0:
                     if self.aVal[i] < self.analogAttrib[keyboard.active_layers[0]][i + self.offset] and self.pressed[i] == False:
                         self.pressed[i] = True
