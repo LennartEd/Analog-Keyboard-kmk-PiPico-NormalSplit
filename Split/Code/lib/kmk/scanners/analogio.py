@@ -61,7 +61,6 @@ class AnalogScanner(Scanner):
         self.output_range = (0,4)
         self.minMax = [[25000, 24000] for _ in range(22)]
         self.noise = noise
-        print(self.noise)
         #print(self.minMax)
            
     @property
@@ -76,7 +75,7 @@ class AnalogScanner(Scanner):
         
         #print(self.offset)
         if len(self.que) == 0: #if no key is in que
-            time.sleep(0.1)
+            
             for i in range(self.multiNum): #cycles through multiplexer
                 self.outPins[0].value = (i & 0b0001) != 0
                 self.outPins[1].value = (i & 0b0010) != 0
@@ -92,8 +91,6 @@ class AnalogScanner(Scanner):
                     self.minMax[i][0] = self.aVal[i]-self.noise
                 if self.aVal[i] < self.minMax[i][1]:
                     self.minMax[i][1] = self.aVal[i]+self.noise
-                  
-                #print(self.minMax)
                 
                 self.aVal[i] = remap_range(self.aVal[i], self.minMax[i], self.output_range)
                   
@@ -127,7 +124,7 @@ class AnalogScanner(Scanner):
         elif len(self.que) > 0: #if keys in que: remove one from que and send return 
             temp = self.que.pop(0)
             #print(temp, self.pressed[temp])
-            #return keypad.Event(temp+self.offset, self.pressed[temp])
+            return keypad.Event(temp+self.offset, self.pressed[temp])
 
         
         

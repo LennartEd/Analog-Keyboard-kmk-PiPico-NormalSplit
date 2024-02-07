@@ -38,9 +38,9 @@ keyboard.keymap = [
     [
        #Default qwerty
        #     |        |        |        |        |        |        | |        |        |        |        |        |        |        |
-        KC.ESC,  KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                                     KC.Y,    KC.U,    KC.I,    KC.O,    KC.P,   KC.LGUI, 
+        KC.ESC,  KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                                     KC.Y,    KC.U,    KC.I,    KC.O,    KC.P,   KC.LWIN, 
         KC.TAB,  KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                                    KC.H,    KC.J,    KC.K,    KC.L,    KC.SCLN, KC.DEL,  
-        KC.DEL,  KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                                    KC.N,    KC.M,    KC.COMM, KC.DOT,  KC.SLSH, KC.RSFT,  
+        KC.BSPC,  KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                                    KC.N,    KC.M,    KC.COMM, KC.DOT,  KC.SLSH, KC.PSCR,  
                                             N2,KC.SPC,KC.LALT,KC.LCTL,                KC.ENT,KC.RCTL,KC.BSPC,   KC.LSFT,
                                                             
                                                                 #encoder btn
@@ -67,7 +67,7 @@ keyboard.keymap = [
                                 _____,_____,_____,  _____,       _____,_____,_____,_____,
                                                             
                                                 #encoder btn
-                                                    nW,                   KC.MPLY,
+                                                    _____,                   _____,
         #Encoder 1 (horizontal) 
         _____,    # left encoder Clock
         _____,    # left encoder counterClock
@@ -88,7 +88,7 @@ keyboard.keymap = [
                                             N2,KC.SPC,KC.LALT,KC.LCTL,                KC.ENT,KC.RCTL,KC.BSPC,   KC.LSFT,
                                                             
                                                                 #encoder btn
-                                                                nW,                   KC.MPLY,
+                                                                _____,                   _____,
                                                             
                                                             
         #Encoder 1 (horizontal) 
