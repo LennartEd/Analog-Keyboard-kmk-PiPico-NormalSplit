@@ -20,7 +20,7 @@ def bootcfg(
     nkro: bool = False,
     pan: bool = False,
     storage: bool = True,
-    usb_id: Optional[tuple[str, str]] = None,
+    usb_id: Optional[tuple[str, str]] = ('hall','board'),
     **kwargs,
 ) -> bool:
 

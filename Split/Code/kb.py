@@ -42,7 +42,8 @@ class KMKKeyboard(_KMKKeyboard):
                 outPins = self.outPins,
                 multiNum = self.multiplexer,
                 numOfKeys = self.numberOfKeys,
-                analogAttrib = self.analogKeyAttribut
+                analogAttrib = self.analogKeyAttribut,
+                noise = self.noise
             ),
             
             KeysScanner(
@@ -92,6 +93,7 @@ class KMKKeyboard(_KMKKeyboard):
     
     numberOfKeys = 22  #number of analog keys (per side if its split)
     
+    noise = 500 
 
     
     analogKeyAttribut = [ #choose per key modes and values (positive means threshold negativ means rapid trigger 
