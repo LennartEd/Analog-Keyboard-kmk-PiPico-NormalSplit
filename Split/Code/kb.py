@@ -92,8 +92,6 @@ class KMKKeyboard(_KMKKeyboard):
     
     numberOfKeys = 22  #number of analog keys (per side if its split)
     
-
-    
     analogKeyAttribut = [ #choose per key modes and values (positive means threshold negativ means rapid trigger 
         [
             2,2,2,2,2,2,
@@ -102,7 +100,7 @@ class KMKKeyboard(_KMKKeyboard):
                   2,2,2,
                       2,
             
-            0,0,0,0,0,0,
+            0,0,0,0,0,
             
             2,2,2,2,2,2,
             2,2,2,2,2,2,
