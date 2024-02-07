@@ -4,7 +4,7 @@
 This is a fully analog keyboard using magnetic keys and hall sensors. I'm using a RP2040 but since it is KMK (circuitpython) based it should be compatible with other boards. I build a split keyboard, but any type form factor should work. 
 This is my first experience with circuitpython so code might me wonky.
 
-#TO-DO
+# TO-DO
 - [ ] automatic callibration
 - [ ] support all types of multiplexers (not just 16:1)
 - [ ] fix mouse wheel only pressing every second turn

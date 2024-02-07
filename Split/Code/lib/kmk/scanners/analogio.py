@@ -61,7 +61,9 @@ class AnalogScanner(Scanner):
         self.output_range = (0,4)
         self.minMax = [[25000, 24000] for _ in range(22)]
         self.noise = noise
-        #print(self.minMax)
+        
+        
+        
            
     @property
     def key_count(self):

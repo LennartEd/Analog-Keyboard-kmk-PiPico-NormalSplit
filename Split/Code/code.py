@@ -33,12 +33,12 @@ nW = simple_key_sequence((KC.LALT(KC.TAB),KC.MPLY)) #KC.MACRO_SLEEP_MS(1000)
 pas = send_string("hi")
 
 # Keymap 
-# fmt: off bvb 
+# fmt: off 
 keyboard.keymap = [
     [
        #Default qwerty
        #     |        |        |        |        |        |        | |        |        |        |        |        |        |        |
-        KC.ESC,  KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                                     KC.Y,    KC.U,    KC.I,    KC.O,    KC.P,   KC.LWIN, 
+        KC.ESC,  KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                                     KC.Y,    KC.U,    KC.I,    KC.O,    KC.P,   KC.LGUI, 
         KC.TAB,  KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                                    KC.H,    KC.J,    KC.K,    KC.L,    KC.SCLN, KC.DEL,  
         KC.BSPC,  KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                                    KC.N,    KC.M,    KC.COMM, KC.DOT,  KC.SLSH, KC.PSCR,  
                                             N2,KC.SPC,KC.LALT,KC.LCTL,                KC.ENT,KC.RCTL,KC.BSPC,   KC.LSFT,
@@ -53,14 +53,14 @@ keyboard.keymap = [
         KC.DOWN,    # right encoder Clock
         KC.UP,    # right encoder counterClock
         
-        #Encoder 2 (vertical)
+        #Encoder 2 (vertical) 
         KC.VOLD,    # left encoder Clock
         KC.VOLU,    # left encoder counterClock
         KC.MPRV,    # right encoder Clock
         KC.MNXT,    # right encoder counterClock
     ],
     [
-       #Numbers
+       #Numbers 
         _____,pas,KC.F1,KC.F2,KC.F3,KC.F4,                                 KC.F5,KC.F6,KC.F7,KC.F8,KC.F9,KC.F10, 
         _____,KC.N0,KC.N1,KC.N2,KC.N3,KC.N4,                                 KC.N5,KC.N6,KC.N7,KC.N8,KC.N9,KC.F11,  
         _____,xxxxx,xxxxx,xxxxx,xxxxx,KC.RALT,                                 KC.LEFT,KC.UP,KC.DOWN,KC.RIGHT,xxxxx,KC.F12,  

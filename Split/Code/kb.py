@@ -93,7 +93,7 @@ class KMKKeyboard(_KMKKeyboard):
     
     numberOfKeys = 22  #number of analog keys (per side if its split)
     
-    noise = 500 #buffer to eliminate ghost key presses
+    noise = 500 
 
     
     analogKeyAttribut = [ #choose per key modes and values (positive means threshold negativ means rapid trigger 
@@ -104,7 +104,7 @@ class KMKKeyboard(_KMKKeyboard):
                   2,2,2,
                       2,
             
-            0,0,0,0,0,0,
+            0,0,0,0,0,
             
             2,2,2,2,2,2,
             2,2,2,2,2,2,
@@ -119,7 +119,7 @@ class KMKKeyboard(_KMKKeyboard):
                   2,2,2,
                       2,
             
-            0,0,0,0,0,0,
+            0,0,0,0,0,
             
             2,2,2,2,2,2,
             2,2,2,2,2,2,
@@ -134,7 +134,7 @@ class KMKKeyboard(_KMKKeyboard):
                   2,2,2,
                       2,
             
-            0,0,0,0,0,0,
+            0,0,0,0,0,
             
             2,2,2,2,2,2,
             2,2,2,2,2,2,
