@@ -17,6 +17,7 @@ In the future i might create v2 template that fixes the flaws.
 Also as LCSC didn't have the LEDs in stock, I build mine without them. So there is no guaranty that I did the LED wiring correctly. I did however test the code with the onboard led of the RP2040, so the code should work.
 
 ### Flaws with v1
+- Horizontal encoder has the wrong footprint (gnd is not in the middle)
 - dont solder MCU daughter board onto PCB directly
 - bigger pads for hand soldering
 - more mounting holes
