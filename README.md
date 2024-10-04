@@ -30,7 +30,7 @@ Also as LCSC didn't have the LEDs in stock, I build mine without them. So there 
 | Multiplexer| CD74HC4067M96 | C496123		|
 | TRRS jack  | PJ-3220-5A	 | C707251		|
 | MCU		 | Waveshare RP2040-zero| --	|
-| Capacitor 100uF| GRM21BR60J107ME15L| C141660|
+| ~~Capacitor 100uF~~| ~~GRM21BR60J107ME15L~~| ~~C141660~~|
 |(LED)       |sk6812 mini-e  | C5149201     |
 
 
@@ -43,7 +43,7 @@ Also as LCSC didn't have the LEDs in stock, I build mine without them. So there 
 
 **TRRS jack:** 
 
-**Capacitor:** Capacitors are not strictly necessary but improve resolution. I tried a few and found that 100uF worked the best.
+**Capacitor:** Capacitors are not strictly necessary but improve resolution. ~~I tried a few and found that 100uF worked the best.~~ Use different sensor filters
 
 #### How it works
 The position of the magnet in the switch is red by the hall-effect sensor. Because the pi-pico only has 4 ADCs we need multiplexers to cycle between the sensors. 
